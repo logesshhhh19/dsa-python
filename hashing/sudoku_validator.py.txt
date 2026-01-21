@@ -1,0 +1,30 @@
+class Solution:
+    def isValidSudoku(self, board):
+        for row in board:
+            seen = set()
+            for v in row:
+                if v != ".":
+                    if v in seen:
+                        return False
+                    seen.add(v)
+
+        for col in range(9):
+            seen = set()
+            for row in range(9):
+                v = board[row][col]
+                if v != ".":
+                    if v in seen:
+                        return False
+                    seen.add(v)
+
+        for br in range(0, 9, 3):
+            for bc in range(0, 9, 3):
+                seen = set()
+                for i in range(3):
+                    for j in range(3):
+                        v = board[br+i][bc+j]
+                        if v != ".":
+                            if v in seen:
+                                return False
+                            seen.add(v)
+        return True
